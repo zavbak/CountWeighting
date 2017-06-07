@@ -24,4 +24,8 @@ public class MainPr extends MvpPresenter<MainView> {
     public void commandStartScreenRealmTests() {
         getViewState().setFragmentRealmTests();
     }
+
+    public void commandStartScreenListProduct() {
+        getViewState().setFragmentListProduct();
+    }
 }

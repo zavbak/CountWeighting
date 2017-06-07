@@ -33,9 +33,7 @@ public class SaveProductInteractor implements Interactor {
         try {
             mRealm.beginTransaction();
 
-
             if (mProduct.getId() == 0) {
-
                 realmProduct = mRealm.createObject(Product.class,mRealmHelper.getNextId(Product.class));
             } else {
                 realmProduct = mRealm.where(Product.class).equalTo(RealmTable.ID, mProduct.getId()).findFirst();

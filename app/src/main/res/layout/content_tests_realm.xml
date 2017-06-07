@@ -88,22 +88,33 @@
         app:layout_constraintTop_toBottomOf="@+id/btShow"/>
 
     <Button
+        android:id="@+id/btAddBarcode"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:textSize="12dp"
+        android:text="add barcode"
+        app:layout_constraintTop_toBottomOf="@+id/btShow"
+        app:layout_constraintLeft_toRightOf="@+id/btGetProductById"/>
+
+    <Button
         android:id="@+id/btDellBarcode"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:textSize="12dp"
         android:text="dell barcode"
         app:layout_constraintTop_toBottomOf="@+id/btShow"
-        app:layout_constraintLeft_toRightOf="@+id/btGetProductById"/>
+        app:layout_constraintLeft_toRightOf="@+id/btAddBarcode"/>
+
 
     <Button
         android:id="@+id/btDellAll"
-        android:layout_width="wrap_content"
+        android:layout_width="48dp"
         android:layout_height="48dp"
         android:textSize="12dp"
-        android:text="dell barcode"
+        android:text="dell"
         app:layout_constraintTop_toBottomOf="@+id/btShow"
         app:layout_constraintLeft_toRightOf="@+id/btDellBarcode"/>
+
 
     <ScrollView
         android:layout_width="0dp"

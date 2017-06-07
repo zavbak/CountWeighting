@@ -22,4 +22,13 @@
 
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <Button
+        android:id="@+id/btListProduct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Товары"
+        app:layout_constraintTop_toBottomOf="@+id/btStartTestsRealm"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 </android.support.constraint.ConstraintLayout>

@@ -29,6 +29,7 @@ public class MainFragment extends MvpAppCompatFragment implements MainFragmentVi
 
     public interface CallBackMainActivities{
         void startScreenRealmTests();
+        void startScreenListProduct();
     }
 
     public static MainFragment getInstance() {
@@ -53,6 +54,12 @@ public class MainFragment extends MvpAppCompatFragment implements MainFragmentVi
     @OnClick(R.id.btStartTestsRealm)
     void onCliskBtStartTestRealm() {
         ((CallBackMainActivities) getActivity()).startScreenRealmTests();
+    }
+
+
+    @OnClick(R.id.btListProduct)
+    void onCliskBtListProduct() {
+        ((CallBackMainActivities) getActivity()).startScreenListProduct();
     }
 
 }

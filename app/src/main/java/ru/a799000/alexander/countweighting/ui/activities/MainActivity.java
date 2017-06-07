@@ -19,6 +19,7 @@ import butterknife.OnClick;
 import ru.a799000.alexander.countweighting.R;
 import ru.a799000.alexander.countweighting.mvp.presenters.MainPr;
 import ru.a799000.alexander.countweighting.mvp.view.MainView;
+import ru.a799000.alexander.countweighting.ui.fargments.ListProductFragment;
 import ru.a799000.alexander.countweighting.ui.fargments.MainFragment;
 import ru.a799000.alexander.countweighting.ui.fargments.TestsRealmFragment;
 
@@ -90,8 +91,23 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,MainF
     }
 
     @Override
+    public void setFragmentListProduct() {
+        getFragmentManager().findFragmentById(R.id.fragment);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment, ListProductFragment.getInstance(),ListProductFragment.TAG)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
     public void startScreenRealmTests() {
         mPresenter.commandStartScreenRealmTests();
+    }
+
+    @Override
+    public void startScreenListProduct() {
+        mPresenter.commandStartScreenListProduct();
     }
 
 }

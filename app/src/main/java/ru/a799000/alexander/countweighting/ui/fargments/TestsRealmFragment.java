@@ -62,7 +62,7 @@ public class TestsRealmFragment extends MvpAppCompatFragment implements TestsRea
     }
 
     @OnClick(R.id.btDellProdact)
-    void onClickBtDellBarcode(){
+    void onClickBtDellProduct(){
         mPresenter.onClickBtDellProdact();
     }
 
@@ -72,7 +72,20 @@ public class TestsRealmFragment extends MvpAppCompatFragment implements TestsRea
         mPresenter.onClickBtbtGetProductById();
     }
 
+    @OnClick(R.id.btAddBarcode)
+    void onClickBtbtAddBarcode(){
+        mPresenter.onClickBtAddBarcode();
+    }
 
+    @OnClick(R.id.btDellBarcode)
+    void onClickBtDellBarcode(){
+        mPresenter.onClickBtDellBarcode();
+    }
+
+    @OnClick(R.id.btDellAll)
+    void onClickBtDellAll(){
+        mPresenter.onClickBtDellAll();
+    }
 
 
     @Override

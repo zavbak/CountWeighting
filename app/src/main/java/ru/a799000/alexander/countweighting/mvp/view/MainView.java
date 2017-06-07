@@ -21,4 +21,6 @@ public interface MainView extends MvpView{
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void setFragmentRealmTests();
+    @StateStrategyType(OneExecutionStateStrategy.class)
+    void setFragmentListProduct();
 }
