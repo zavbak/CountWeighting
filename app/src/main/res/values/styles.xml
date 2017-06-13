@@ -17,4 +17,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <style name="MyButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@android:color/holo_green_light</item>
+        <item name="colorButtonNormal">@android:color/holo_orange_dark</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+
+    </style>
+
 </resources>

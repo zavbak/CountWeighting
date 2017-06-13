@@ -75,6 +75,8 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
         int mSites;
 
 
+
+
         public ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, itemView);

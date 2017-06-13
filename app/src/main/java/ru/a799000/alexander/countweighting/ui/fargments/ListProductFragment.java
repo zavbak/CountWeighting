@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +23,15 @@ import ru.a799000.alexander.countweighting.R;
 import ru.a799000.alexander.countweighting.mvp.model.intities.Product;
 import ru.a799000.alexander.countweighting.mvp.presenters.ListProductPr;
 import ru.a799000.alexander.countweighting.mvp.view.ListProductView;
+import ru.a799000.alexander.countweighting.ui.activities.CallBaskMainActivities;
 import ru.a799000.alexander.countweighting.ui.adapters.AdapterListProduct;
 
 
 public class ListProductFragment extends MvpAppCompatFragment implements ListProductView {
 
     public static final String TAG = "ListProductFragment";
+
+
 
     @InjectPresenter
     ListProductPr mPresenter;
@@ -55,7 +59,26 @@ public class ListProductFragment extends MvpAppCompatFragment implements ListPro
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.list_product_fragment, container, false);
+        View view = inflater.inflate(R.layout.list_product_fragment, container, false);
+        return view;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if(event.getAction()== KeyEvent.ACTION_DOWN){
+                    return mPresenter.pressKey(keyCode);
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -74,5 +97,10 @@ public class ListProductFragment extends MvpAppCompatFragment implements ListPro
     @Override
     public void refreshList(RealmResults<Product> list) {
         mRecyclerView.setAdapter(new AdapterListProduct(list, id -> mPresenter.clickItem(id)));
+    }
+
+    @Override
+    public void startDetailProduct(String id) {
+        ((CallBaskMainActivities) getActivity()).startDetailFragment(id);
     }
 }

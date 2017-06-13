@@ -39,10 +39,19 @@ public class ListProductPr extends MvpPresenter<ListProductView>{
     }
 
     public void clickItem(String id) {
-        getViewState().showTvMessageView(id);
+        getViewState().startDetailProduct(id);
     }
 
     public void onStart() {
         refreshList();
+    }
+
+    public boolean pressKey(int keyCode) {
+        if(keyCode == 8){
+            getViewState().showTvMessageView("Новый товар!");
+            return true;
+        }
+        return  false;
+
     }
 }

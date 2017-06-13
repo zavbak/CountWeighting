@@ -15,6 +15,7 @@ import butterknife.OnClick;
 import ru.a799000.alexander.countweighting.R;
 import ru.a799000.alexander.countweighting.mvp.presenters.MainFragmentPr;
 import ru.a799000.alexander.countweighting.mvp.view.MainFragmentView;
+import ru.a799000.alexander.countweighting.ui.activities.CallBaskMainActivities;
 
 /**
  * Created by user on 07.06.2017.
@@ -27,10 +28,7 @@ public class MainFragment extends MvpAppCompatFragment implements MainFragmentVi
     @InjectPresenter
     MainFragmentPr mPresenter;
 
-    public interface CallBackMainActivities{
-        void startScreenRealmTests();
-        void startScreenListProduct();
-    }
+
 
     public static MainFragment getInstance() {
         MainFragment fragment = new MainFragment();
@@ -53,13 +51,13 @@ public class MainFragment extends MvpAppCompatFragment implements MainFragmentVi
 
     @OnClick(R.id.btStartTestsRealm)
     void onCliskBtStartTestRealm() {
-        ((CallBackMainActivities) getActivity()).startScreenRealmTests();
+        ((CallBaskMainActivities) getActivity()).startScreenRealmTests();
     }
 
 
     @OnClick(R.id.btListProduct)
     void onCliskBtListProduct() {
-        ((CallBackMainActivities) getActivity()).startScreenListProduct();
+        ((CallBaskMainActivities) getActivity()).startScreenListProduct();
     }
 
 }

@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -18,12 +16,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.a799000.alexander.countweighting.R;
 import ru.a799000.alexander.countweighting.mvp.presenters.MainPr;
+import ru.a799000.alexander.countweighting.mvp.view.DetaiProductView;
 import ru.a799000.alexander.countweighting.mvp.view.MainView;
+import ru.a799000.alexander.countweighting.ui.fargments.DetaiProductFragment;
 import ru.a799000.alexander.countweighting.ui.fargments.ListProductFragment;
 import ru.a799000.alexander.countweighting.ui.fargments.MainFragment;
 import ru.a799000.alexander.countweighting.ui.fargments.TestsRealmFragment;
 
-public class MainActivity extends MvpAppCompatActivity implements MainView,MainFragment.CallBackMainActivities{
+public class MainActivity extends MvpAppCompatActivity implements MainView,CallBaskMainActivities {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -32,6 +32,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,MainF
 
     @InjectPresenter
     MainPr mPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,MainF
                 .commit();
     }
 
+
+
     @Override
     public void setFragmentListProduct() {
         getFragmentManager().findFragmentById(R.id.fragment);
@@ -108,6 +111,16 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,MainF
     @Override
     public void startScreenListProduct() {
         mPresenter.commandStartScreenListProduct();
+    }
+
+    @Override
+    public void startDetailFragment(String id) {
+        getFragmentManager().findFragmentById(R.id.fragment);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment, DetaiProductFragment.getInstance(id),DetaiProductFragment.TAG)
+                .addToBackStack(null)
+                .commit();
     }
 
 }

@@ -20,4 +20,8 @@ public interface ListProductView extends MvpView {
 
     @StateStrategyType(OneExecutionStateStrategy.class)
     void refreshList(RealmResults<Product> list);
+
+    @StateStrategyType(OneExecutionStateStrategy.class)
+    void startDetailProduct(String id);
+
 }

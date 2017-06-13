@@ -117,7 +117,7 @@ public class Product extends RealmObject {
                 ", unit='" + unit + '\'' +
                 ", name='" + name + '\'' +
                 ", initBarcode='" + initBarcode + '\'' +
-                ", start=" + start +
+                ", onStart=" + start +
                 ", finish=" + finish +
                 ", coef=" + coef +
                 ", barcodes=" + barcodes +
@@ -126,6 +126,7 @@ public class Product extends RealmObject {
 
     public  class Builder {
 
+        private long id;
         private String code;
         private String unit;
         private String name;
@@ -135,6 +136,10 @@ public class Product extends RealmObject {
         private float coef;
 
 
+        public Builder id(long id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder code(String code) {
             this.code = code;

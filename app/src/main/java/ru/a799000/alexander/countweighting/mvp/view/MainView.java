@@ -15,10 +15,8 @@ public interface MainView extends MvpView{
 
     @StateStrategyType(SkipStrategy.class)
     void showSnackbarView(@NonNull CharSequence mess);
-
     @StateStrategyType(OneExecutionStateStrategy.class)
     void setFragmentMainFragmentView();
-
     @StateStrategyType(OneExecutionStateStrategy.class)
     void setFragmentRealmTests();
     @StateStrategyType(OneExecutionStateStrategy.class)
