@@ -28,4 +28,8 @@ public class MainPr extends MvpPresenter<MainView> {
     public void commandStartScreenListProduct() {
         getViewState().setFragmentListProduct();
     }
+
+    public void popBackStackImmediate() {
+        getViewState().popBackStackImmediateView();
+    }
 }

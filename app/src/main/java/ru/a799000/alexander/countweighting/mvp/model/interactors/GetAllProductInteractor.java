@@ -24,7 +24,6 @@ public class GetAllProductInteractor implements Interactor {
         App.getAppComponent().injectGetAllProductInteractor(this);
     }
 
-
     @Override
     public Observable<RealmResults<Product>> getObservable() {
         try {

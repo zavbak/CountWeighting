@@ -74,7 +74,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,CallB
     @Override
     public void setFragmentMainFragmentView() {
 
-        getFragmentManager().findFragmentById(R.id.fragment);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment, MainFragment.getInstance(),MainFragment.TAG)
@@ -83,11 +83,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,CallB
 
     @Override
     public void setFragmentRealmTests() {
-        getFragmentManager().findFragmentById(R.id.fragment);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment, TestsRealmFragment.getInstance(),TestsRealmFragment.TAG)
-                .addToBackStack(null)
+                .addToBackStack("myStack")
                 .commit();
     }
 
@@ -95,12 +95,21 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,CallB
 
     @Override
     public void setFragmentListProduct() {
-        getFragmentManager().findFragmentById(R.id.fragment);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment, ListProductFragment.getInstance(),ListProductFragment.TAG)
-                .addToBackStack(null)
+                .addToBackStack("myStack")
                 .commit();
+    }
+
+    @Override
+    public void popBackStackImmediateView() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -115,12 +124,17 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,CallB
 
     @Override
     public void startDetailFragment(String id) {
-        getFragmentManager().findFragmentById(R.id.fragment);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment, DetaiProductFragment.getInstance(id),DetaiProductFragment.TAG)
-                .addToBackStack(null)
+                .addToBackStack("myStack")
                 .commit();
+    }
+
+    @Override
+    public void popBackStackImmediate() {
+        mPresenter.popBackStackImmediate();
     }
 
 }

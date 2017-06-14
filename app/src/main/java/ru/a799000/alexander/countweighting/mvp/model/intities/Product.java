@@ -24,6 +24,7 @@ public class Product extends RealmObject {
 
     private Product(Builder builder) {
 
+        this.id   = builder.id;
         this.code = builder.code;
         this.unit = builder.unit;
         this.name = builder.name;
@@ -173,21 +174,6 @@ public class Product extends RealmObject {
 
         public Builder coef(float coef) {
             this.coef = coef;
-            return this;
-        }
-
-
-
-        public Builder fromPrototype(Product prototype) {
-
-            code = prototype.code;
-            unit = prototype.unit;
-            name = prototype.name;
-            initBarcode = prototype.initBarcode;
-            start = prototype.start;
-            finish = prototype.finish;
-            coef = prototype.coef;
-
             return this;
         }
 

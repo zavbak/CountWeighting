@@ -63,7 +63,10 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        android:layout_marginEnd="8dp"
+        android:textStyle="bold"
+        android:textSize="18dp"
+    />
 
     <EditText
         android:id="@+id/edStart"
@@ -147,17 +150,17 @@
         android:background="#222222">
 
         <Button
-            android:id="@+id/btCancel"
+            android:id="@+id/btCounting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Отмена (2)"
+            android:text="Счет (2)"
             android:theme="@style/MyButton"
             android:layout_weight="05"/>
         <Button
-            android:id="@+id/btOk"
+            android:id="@+id/btSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ок (1)"
+            android:text="Сохранить (1)"
             android:theme="@style/MyButton"
             android:layout_weight="05"/>
 

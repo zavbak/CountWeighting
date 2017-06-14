@@ -8,4 +8,5 @@ public interface CallBaskMainActivities {
     void startScreenRealmTests();
     void startScreenListProduct();
     void startDetailFragment(String id);
+    void popBackStackImmediate();
 }
