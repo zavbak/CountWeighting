@@ -1,5 +1,6 @@
 package ru.a799000.alexander.countweighting.ui.fargments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -24,6 +26,7 @@ import ru.a799000.alexander.countweighting.mvp.model.intities.Product;
 import ru.a799000.alexander.countweighting.mvp.presenters.ListProductPr;
 import ru.a799000.alexander.countweighting.mvp.view.ListProductView;
 import ru.a799000.alexander.countweighting.ui.activities.CallBaskMainActivities;
+import ru.a799000.alexander.countweighting.ui.adapters.AdapretProdact;
 import ru.a799000.alexander.countweighting.ui.adapters.AdapterListProduct;
 
 
@@ -36,11 +39,14 @@ public class ListProductFragment extends MvpAppCompatFragment implements ListPro
     @InjectPresenter
     ListProductPr mPresenter;
 
-    @BindView(R.id.tvMessage)
-    TextView tvMessage;
+    //@BindView(R.id.tvMessage)
+    //TextView tvMessage;
 
-    @BindView(R.id.recycler_view)
-    RecyclerView mRecyclerView;
+    //@BindView(R.id.recycler_view)
+    //RecyclerView mRecyclerView;
+
+    @BindView(R.id.lview)
+    ListView mListView;
 
 
     public static ListProductFragment getInstance() {
@@ -59,7 +65,7 @@ public class ListProductFragment extends MvpAppCompatFragment implements ListPro
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list_product_fragment, container, false);
+        View view = inflater.inflate(R.layout.list_product_fragment_new, container, false);
         return view;
     }
 
@@ -85,18 +91,34 @@ public class ListProductFragment extends MvpAppCompatFragment implements ListPro
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
+
     }
 
 
     @Override
     public void showTvMessageView(@NonNull CharSequence text) {
-        tvMessage.setText(text);
+        //tvMessage.setText(text);
     }
 
     @Override
     public void refreshList(RealmResults<Product> list) {
-        mRecyclerView.setAdapter(new AdapterListProduct(list, id -> mPresenter.clickItem(id)));
+        //mRecyclerView.setAdapter(new AdapterListProduct(list, id -> mPresenter.clickItem(id)));
+        AdapretProdact adapter = new AdapretProdact(list);
+        mListView.setAdapter(adapter);
+        mListView.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+
+            public void onFocusChange(View v, boolean hasFocus)
+            {
+                //v.setBackgroundColor(hasFocus ? Color.GRAY : Color.BLACK);
+            }
+        });
+        mListView.requestFocus();
+        mListView.requestFocus(5);
+        mListView.setClickable(true);
+
     }
 
     @Override

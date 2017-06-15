@@ -32,4 +32,8 @@ public class MainPr extends MvpPresenter<MainView> {
     public void popBackStackImmediate() {
         getViewState().popBackStackImmediateView();
     }
+
+    public void onBarcode(String barcode) {
+         getViewState().sendBarcodeToFragment(barcode);
+    }
 }

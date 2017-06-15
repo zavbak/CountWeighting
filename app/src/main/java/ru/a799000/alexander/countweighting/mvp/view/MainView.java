@@ -23,4 +23,7 @@ public interface MainView extends MvpView{
     void setFragmentListProduct();
     @StateStrategyType(OneExecutionStateStrategy.class)
     void popBackStackImmediateView();
+
+    @StateStrategyType(SkipStrategy.class)
+    void sendBarcodeToFragment(String barcode);
 }

@@ -21,6 +21,8 @@ import ru.a799000.alexander.countweighting.R;
 import ru.a799000.alexander.countweighting.mvp.model.interactors.BarcodeSeporatorIterator;
 import ru.a799000.alexander.countweighting.mvp.presenters.DetaiProductPr;
 import ru.a799000.alexander.countweighting.mvp.view.DetaiProductView;
+import ru.a799000.alexander.countweighting.servises.barcode.TakeBarcode;
+import ru.a799000.alexander.countweighting.ui.activities.BarcodeSet;
 import ru.a799000.alexander.countweighting.ui.activities.CallBaskMainActivities;
 import rx.subscriptions.CompositeSubscription;
 
@@ -28,7 +30,7 @@ import rx.subscriptions.CompositeSubscription;
  * Created by Alex on 13.06.2017.
  */
 
-public class DetaiProductFragment extends MvpAppCompatFragment implements DetaiProductView {
+public class DetaiProductFragment extends MvpAppCompatFragment implements DetaiProductView,TakeBarcode {
 
     @InjectPresenter
     DetaiProductPr mPresenter;
@@ -55,7 +57,7 @@ public class DetaiProductFragment extends MvpAppCompatFragment implements DetaiP
     @BindView(R.id.edCof)
     EditText edCof;
 
-    public static final String TAG = "ListProductFragment";
+    public static final String TAG = "DetaiProductFragment";
     public static final String ID = "id";
     private CompositeSubscription mCompositeSubscription;
 
@@ -68,6 +70,19 @@ public class DetaiProductFragment extends MvpAppCompatFragment implements DetaiP
         args.putString(ID, id);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((BarcodeSet) getActivity()).unregisterReceiver();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((BarcodeSet) getActivity()).registerBarcodeReceiver(TAG);
     }
 
 
@@ -172,5 +187,10 @@ public class DetaiProductFragment extends MvpAppCompatFragment implements DetaiP
     public void onDestroy() {
         super.onDestroy();
         mCompositeSubscription.unsubscribe();
+    }
+
+    @Override
+    public void takeBarcode(String barcode) {
+        mPresenter.takeBarcode(barcode);
     }
 }

@@ -67,9 +67,6 @@ public class DetaiProductPr extends MvpPresenter<DetaiProductView> {
     void refreshMessage(){
         mSeporatorIterator = new BarcodeSeporatorIterator(mProduct.getInitBarcode(),mProduct);
         getViewState().refreshMessage();
-
-
-
     }
 
 
@@ -188,5 +185,11 @@ public class DetaiProductPr extends MvpPresenter<DetaiProductView> {
                 .observeOn(AndroidSchedulers.mainThread()) //AndroidSchedulers.mainThread()
                 .subscribe(this::initProduct);
         getViewState().finishView();
+    }
+
+    public void takeBarcode(String barcode) {
+        mProduct.setInitBarcode(barcode);
+        getViewState().refreshView();
+        getViewState().refreshMessage();
     }
 }

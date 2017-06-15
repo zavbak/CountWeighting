@@ -1,5 +1,6 @@
 package ru.a799000.alexander.countweighting.ui.activities;
 
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -18,20 +19,25 @@ import ru.a799000.alexander.countweighting.R;
 import ru.a799000.alexander.countweighting.mvp.presenters.MainPr;
 import ru.a799000.alexander.countweighting.mvp.view.DetaiProductView;
 import ru.a799000.alexander.countweighting.mvp.view.MainView;
+import ru.a799000.alexander.countweighting.servises.barcode.BarcodeDataBroadcastReceiver;
+import ru.a799000.alexander.countweighting.servises.barcode.TakeBarcode;
 import ru.a799000.alexander.countweighting.ui.fargments.DetaiProductFragment;
 import ru.a799000.alexander.countweighting.ui.fargments.ListProductFragment;
 import ru.a799000.alexander.countweighting.ui.fargments.MainFragment;
 import ru.a799000.alexander.countweighting.ui.fargments.TestsRealmFragment;
 
-public class MainActivity extends MvpAppCompatActivity implements MainView,CallBaskMainActivities {
+public class MainActivity extends MvpAppCompatActivity implements MainView,CallBaskMainActivities,BarcodeSet {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
+
 
     @InjectPresenter
     MainPr mPresenter;
+
+    BarcodeDataBroadcastReceiver mBarcodeDataBroadcastReceiver;
+
+    String mfragmentTagBarcode;
 
 
     @Override
@@ -61,13 +67,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,CallB
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.fab)
-    void onClickFab(){
-        mPresenter.clickFab();
-    }
+
     @Override
-    public void showSnackbarView(@NonNull CharSequence mess){
-        Snackbar.make(fab, mess, Snackbar.LENGTH_LONG)
+    public void showSnackbarView(@NonNull CharSequence mess) {
+        Snackbar.make(findViewById(R.id.root), mess, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
 
@@ -133,8 +136,41 @@ public class MainActivity extends MvpAppCompatActivity implements MainView,CallB
     }
 
     @Override
+    public void sendBarcodeToFragment(String barcode){
+        if(mfragmentTagBarcode !=null){
+            try {
+
+
+                ((TakeBarcode)getSupportFragmentManager().findFragmentByTag(mfragmentTagBarcode)).takeBarcode(barcode);
+            } catch (Exception e) {
+                e.printStackTrace();
+                showSnackbarView(e.getMessage());
+            }
+        }
+    }
+
+    @Override
     public void popBackStackImmediate() {
         mPresenter.popBackStackImmediate();
     }
 
+
+    @Override
+    public void registerBarcodeReceiver(String fragmentTag) {
+        mBarcodeDataBroadcastReceiver = new BarcodeDataBroadcastReceiver(barcode -> {mPresenter.onBarcode(barcode);});
+        IntentFilter intentFilter = new IntentFilter("DATA_SCAN");
+        registerReceiver(mBarcodeDataBroadcastReceiver, intentFilter);
+        registerReceiver(mBarcodeDataBroadcastReceiver, intentFilter);
+        mfragmentTagBarcode = fragmentTag;
+    }
+
+    @Override
+    public void unregisterReceiver() {
+        if(mBarcodeDataBroadcastReceiver != null){
+            unregisterReceiver(mBarcodeDataBroadcastReceiver);
+        }
+
+        mfragmentTagBarcode = null;
+
+    }
 }
