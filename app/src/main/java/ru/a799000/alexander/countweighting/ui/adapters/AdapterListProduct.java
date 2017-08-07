@@ -1,6 +1,8 @@
 package ru.a799000.alexander.countweighting.ui.adapters;
 
 
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,14 +19,17 @@ import ru.a799000.alexander.countweighting.mvp.model.intities.Barcode;
 import ru.a799000.alexander.countweighting.mvp.model.intities.Product;
 
 
-public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.ViewHolder> implements RealmChangeListener {
+public class AdapterListProduct extends InputTrackingRecyclerViewAdapter<AdapterListProduct.ViewHolder> implements RealmChangeListener {
 
     private final RealmResults<Product> mList;
 
     private CallBackClickItem mCallBackClickItem;
 
+    private final static int SELECTOR_COLOR = 0xFFBDBDBD;
+
 
     public AdapterListProduct(RealmResults<Product> list, CallBackClickItem CallBackClickItem) {
+        super();
         mList = list;
         mCallBackClickItem = CallBackClickItem;
         mList.addChangeListener(this);
@@ -43,6 +48,16 @@ public class AdapterListProduct extends RecyclerView.Adapter<AdapterListProduct.
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int i) {
+
+        boolean isSelected = i == getSelectedItem();
+
+        ColorDrawable selectedDrawable = new ColorDrawable(isSelected ? SELECTOR_COLOR : 0X00000000);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)
+            holder.itemView.setBackground(selectedDrawable);
+        else
+            holder.itemView.setBackgroundDrawable(selectedDrawable);
+        holder.itemView.setSelected(isSelected);
+
         holder.setProduct((Product) mList.get(i));
     }
 
